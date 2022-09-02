@@ -1,0 +1,20 @@
+* {
+    box-sizing: border-box;
+}
+
+.container {
+    border: black 2px solid;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.cell {
+    border: black 2px solid;
+    width: 25%;
+    aspect-ratio: 1/1;
+}
+
+.hover {
+    background-color: red;
+}
+
