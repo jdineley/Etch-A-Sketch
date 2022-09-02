@@ -3,13 +3,14 @@
 }
 
 .container {
-    border: black 2px solid;
+    width: 50%;
+    /* border: black 1px solid; */
     display: flex;
     flex-wrap: wrap;
 }
 
 .cell {
-    border: black 2px solid;
+    border: black 1px solid;
     width: 25%;
     aspect-ratio: 1/1;
 }
