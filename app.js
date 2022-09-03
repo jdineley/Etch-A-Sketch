@@ -6,6 +6,23 @@ const singleColorBut = document.querySelector("#singleColor");
 const resetBoardBut = document.querySelector("#reset")
 const shadeBut = document.querySelector("#shade");
 
+// Mouse down to draw logic
+let drawState=false
+window.addEventListener("mousedown",function(e){
+    console.log('mousedown', e.button);
+    // default behavior in chrome is to try and drag and drop an asset
+    // this gets in the way of the draw sweep
+    e.preventDefault();
+if(e.button===0){
+   drawState = true;
+}});
+
+window.addEventListener("mouseup",function(e){
+    console.log('mouseup', e.button);
+if(e.button===0){
+   drawState = false;
+}});
+
 // Global inputs
 let rainbowOn = false;
 let shadeOn = false
@@ -50,12 +67,8 @@ function choseColor(e) {
 
 function shade(e){
     rainbowOn = false;
-    if(!shadeOn) {
-        shadeOn = true; 
-    }
-    console.dir(e.target.getAttribute('class') === 'cell');
+    if(!shadeOn) shadeOn = true;
     if(e.target.getAttribute('class') === 'cell'){   
-        console.dir(e.target.getAttribute('data-opacity'));
         let opacity = Number(e.target.getAttribute('data-opacity'));
         e.target.setAttribute('data-opacity', `${opacity+0.1}`)
         opacity = Number(e.target.getAttribute('data-opacity'))
@@ -66,6 +79,7 @@ function shade(e){
 }
 
 function colorHandler(e) {
+    if(drawState){
         if(rainbowOn){
             e.target.style.backgroundColor = rainbowColors(e)
         } else if(shadeOn){
@@ -75,12 +89,11 @@ function colorHandler(e) {
             e.target.style.backgroundColor = color;
         }
     }
+}
 
 
 // Intial load setup
-
 resetBoard();
-
 
 
 // Event listeners
